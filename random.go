@@ -20,7 +20,7 @@ const (
 
 /*RandomString defines */
 var (
-	RandomString = map[RandomKind]string{
+	RandomString = []string{
 		RandomNum:      "0123456789",
 		RandomLower:    "abcdefghijklmnopqrstuvwxyz",
 		RandomUpper:    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -33,10 +33,8 @@ var (
 //GenerateRandomString 随机字符串
 func GenerateRandomString(size int, kind ...RandomKind) string {
 	s := RandomString[RandomAll]
-	if kind != nil {
-		if k, b := RandomString[kind[0]]; b == true {
-			s = k
-		}
+	if len(kind) > 0 {
+		s = RandomString[kind[0]]
 	}
 	var r []byte
 	rand.Seed(time.Now().UnixNano())
@@ -45,4 +43,19 @@ func GenerateRandomString(size int, kind ...RandomKind) string {
 		r = append(r, s[rand.Intn(ls)])
 	}
 	return string(r)
+}
+
+//GenerateRandom random characters with []byte
+func GenerateRandom(size int, kind ...RandomKind) []byte {
+	s := RandomString[RandomAll]
+	if len(kind) > 0 {
+		s = RandomString[kind[0]]
+	}
+	var r []byte
+	rand.Seed(time.Now().UnixNano())
+	ls := len(s)
+	for i := 0; i < size; i++ {
+		r = append(r, s[rand.Intn(ls)])
+	}
+	return r
 }
