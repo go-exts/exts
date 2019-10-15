@@ -30,6 +30,8 @@ var (
 	}
 )
 
+var count int64
+
 //GenerateRandomString 随机字符串
 func GenerateRandomString(size int, kind ...RandomKind) string {
 	s := RandomString[RandomAll]
@@ -41,11 +43,12 @@ func GenerateRandomString(size int, kind ...RandomKind) string {
 }
 
 func randomByte(src string, size int) (r []byte) {
-	rand.Seed(time.Now().UnixNano())
+	rand.Seed(time.Now().UnixNano() + count)
 	ls := len(src)
 	for ; size > 0; size-- {
 		r = append(r, src[rand.Intn(ls)])
 	}
+	count++
 	return
 }
 
