@@ -15,3 +15,10 @@ func TestGenerateRandom(t *testing.T) {
 		}
 	}
 }
+
+func TestGenerateRandomString(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		str := GenerateRandomString(8)
+		t.Log(str)
+	}
+}
