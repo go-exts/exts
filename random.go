@@ -36,13 +36,17 @@ func GenerateRandomString(size int, kind ...RandomKind) string {
 	if len(kind) > 0 {
 		s = RandomString[kind[0]]
 	}
-	var r []byte
+
+	return string(randomByte(s, size))
+}
+
+func randomByte(src string, size int) (r []byte) {
 	rand.Seed(time.Now().UnixNano())
-	ls := len(s)
-	for i := 0; i < size; i++ {
-		r = append(r, s[rand.Intn(ls)])
+	ls := len(src)
+	for ; size > 0; size-- {
+		r = append(r, src[rand.Intn(ls)])
 	}
-	return string(r)
+	return
 }
 
 //GenerateRandom random characters with []byte
@@ -51,11 +55,5 @@ func GenerateRandom(size int, kind ...RandomKind) []byte {
 	if len(kind) > 0 {
 		s = RandomString[kind[0]]
 	}
-	var r []byte
-	rand.Seed(time.Now().UnixNano())
-	ls := len(s)
-	for i := 0; i < size; i++ {
-		r = append(r, s[rand.Intn(ls)])
-	}
-	return r
+	return randomByte(s, size)
 }
