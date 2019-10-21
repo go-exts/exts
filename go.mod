@@ -1,3 +1,3 @@
-module github.com/gotrait/tool
+module github.com/goextension/tool
 
 go 1.11

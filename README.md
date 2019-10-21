@@ -1,5 +1,4 @@
 # tool
-
 Random string generation function.
 it return the different values all the time.
 ```go
